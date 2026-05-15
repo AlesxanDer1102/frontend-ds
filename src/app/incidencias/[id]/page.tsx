@@ -2,6 +2,7 @@ import Link from "next/link";
 import { obtenerIncidencia, urlImagen } from "@/lib/api";
 import { ETIQUETA_CATEGORIA, type Incidencia } from "@/lib/types";
 import EstadoBadge from "@/components/EstadoBadge";
+import PanelEstado from "@/components/PanelEstado";
 
 export default async function PaginaDetalle({
   params,
@@ -71,6 +72,8 @@ export default async function PaginaDetalle({
               </dd>
             </div>
           </dl>
+
+          <PanelEstado id={incidencia.id} estado={incidencia.estado} />
         </article>
       )}
     </main>
