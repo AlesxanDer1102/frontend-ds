@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend — Registro de Incidencias
 
-## Getting Started
+Interfaz web construida con **Next.js + React + TypeScript + Tailwind CSS**.
+Consume la API del backend (FastAPI) para registrar, consultar y dar
+seguimiento a incidencias en la vía pública.
 
-First, run the development server:
+## Requisitos
 
-```bash
+- Node.js 18+
+- Backend en ejecución (carpeta `backend-ds`, por defecto en `http://localhost:8000`)
+
+## Cómo correrlo
+
+```powershell
+# 1. Instalar dependencias
+npm install
+
+# 2. Levantar el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La aplicación queda disponible en `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ Para el flujo completo, el backend debe estar corriendo. Ver `backend-ds/README.md`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Rutas
 
-## Learn More
+| Ruta                 | Descripción                                     |
+|----------------------|-------------------------------------------------|
+| `/`                  | Listado de incidencias.                         |
+| `/reportar`          | Formulario para registrar una incidencia.       |
+| `/incidencias/[id]`  | Detalle de una incidencia y cambio de estado.   |
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+frontend-ds/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx              # Layout con navegación
+│   │   ├── page.tsx                # Listado de incidencias
+│   │   ├── reportar/page.tsx       # Formulario de reporte
+│   │   └── incidencias/[id]/page.tsx  # Detalle de una incidencia
+│   ├── components/
+│   │   ├── FormularioReporte.tsx   # Formulario con imagen y vista previa
+│   │   ├── TarjetaIncidencia.tsx   # Tarjeta del listado
+│   │   ├── EstadoBadge.tsx         # Insignia de estado
+│   │   └── PanelEstado.tsx         # Panel de cambio de estado
+│   └── lib/
+│       ├── api.ts                  # Cliente HTTP de la API
+│       ├── types.ts                # Tipos e etiquetas
+│       └── workflow.ts             # Transiciones de estado válidas
+├── EVIDENCIAS.md                   # Evidencias de los casos de uso
+└── .env.local                      # Variable NEXT_PUBLIC_API_URL
+```
